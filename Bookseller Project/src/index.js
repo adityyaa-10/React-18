@@ -6,10 +6,12 @@ import { booksdetails } from './Books'
 const BookList = () => {
   return (
     <section className='booklist'>
-      <EventExamples />
+      <div>
+        <EventExamples />
+      </div>
       {booksdetails.map((book) => {
         return <div>
-          <Book {...book} key={booksdetails.id} />
+          <Book {...book} key={book.id} />
         </div>
       })}
     </section>
@@ -43,7 +45,11 @@ const EventExamples = () => {
   );
 }
 
+
 const Book = (props) => {
+  const displayTitle = () => {
+    console.log(title)
+  }
   const { image, title, author } = props;
   return (
     <article className='book'>
@@ -52,6 +58,7 @@ const Book = (props) => {
         alt={title}
       />
       <h2>{title}</h2>
+      <button onClick={displayTitle}>Click to see Title</button>
       <h4>{author}</h4>
     </article>
   );
