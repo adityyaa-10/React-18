@@ -4,53 +4,62 @@ import './index.css'
 import { booksdetails } from './Books'
 
 const BookList = () => {
+  const getBook = (id) => {
+    const book = booksdetails.find((book) => book.id === id)
+    console.log(book)
+  }
   return (
     <section className='booklist'>
       <div>
         <EventExamples />
       </div>
       {booksdetails.map((book) => {
-        return <div>
-          <Book {...book} key={book.id} />
-        </div>
+        return <Book {...book} key={book.id} getBook={getBook} />
       })}
     </section>
   );
 }
 
 const EventExamples = () => {
-  const handleFormInput = () => {
-    console.log('Handle Form Input');
+  const handleFormInput = (e) => {
+    console.log(e);
+    // e.target - element
+    console.log(`Input Name : ${e.target.name}`);
+    console.log(`Input Value : ${e.target.value}`);
+    // console.log('handle form input');
   };
   const handleButtonClick = () => {
-    alert('Handle Button Click')
+    alert('handle button click');
   };
   const handleFormSubmission = (e) => {
     e.preventDefault();
-    console.log('Form Submitted Successfully')
+    console.log('form submitted');
   };
   return (
     <section>
+      {/* add onSubmit Event Handler */}
       <form onSubmit={handleFormSubmission}>
         <h2>Typical Form</h2>
         <input
-          type="text"
-          name="example"
+          type='text'
+          name='example'
           onChange={handleFormInput}
           style={{ margin: '1rem 0' }}
         />
+        {/* add button with type='submit' */}
+        <button type='submit'>submit form</button>
       </form>
-      <button type='submit' onClick={handleButtonClick}>Click Me</button>
+      <button onClick={handleButtonClick}>click me</button>
     </section>
   );
-}
+};
 
 
 const Book = (props) => {
-  const displayTitle = () => {
-    console.log(title)
+  const { image, title, author, getBook, id } = props;
+  const getSingleBook = () => {
+    getBook(id)
   }
-  const { image, title, author } = props;
   return (
     <article className='book'>
       <img
@@ -58,7 +67,7 @@ const Book = (props) => {
         alt={title}
       />
       <h2>{title}</h2>
-      <button onClick={displayTitle}>Click to see Title</button>
+      <button onClick={getSingleBook}>Click to see Title</button>
       <h4>{author}</h4>
     </article>
   );
