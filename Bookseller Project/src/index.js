@@ -9,66 +9,57 @@ const BookList = () => {
     console.log(book)
   }
   return (
-    <section className='booklist'>
-      <div>
-        <EventExamples />
-      </div>
-      {booksdetails.map((book) => {
-        return <Book {...book} key={book.id} getBook={getBook} />
-      })}
-    </section>
+    <>
+      <h1>Amazon Best Sellers</h1>
+      <section className='booklist'>
+        {booksdetails.map((book, index) => {
+          return <Book {...book} key={book.id} getBook={getBook} number={index} />
+        })}
+      </section>
+    </>
   );
 }
 
-const EventExamples = () => {
-  const handleFormInput = (e) => {
-    console.log(e);
-    // e.target - element
-    console.log(`Input Name : ${e.target.name}`);
-    console.log(`Input Value : ${e.target.value}`);
-    // console.log('handle form input');
-  };
-  const handleButtonClick = () => {
-    alert('handle button click');
-  };
-  const handleFormSubmission = (e) => {
-    e.preventDefault();
-    console.log('form submitted');
-  };
-  return (
-    <section>
-      {/* add onSubmit Event Handler */}
-      <form onSubmit={handleFormSubmission}>
-        <h2>Typical Form</h2>
-        <input
-          type='text'
-          name='example'
-          onChange={handleFormInput}
-          style={{ margin: '1rem 0' }}
-        />
-        {/* add button with type='submit' */}
-        <button type='submit'>submit form</button>
-      </form>
-      <button onClick={handleButtonClick}>click me</button>
-    </section>
-  );
-};
+// const EventExamples = () => {
+//   const handleFormInput = (e) => {
+//     console.log(e);
+//     // e.target - element
+//     console.log(`Input Name : ${e.target.name}`);
+//     console.log(`Input Value : ${e.target.value}`);
+//     // console.log('handle form input');
+//   };
+//   const handleFormSubmission = (e) => {
+//     e.preventDefault();
+//     console.log('form submitted');
+//   };
+//   return (
+//     <section>
+//       {/* add onSubmit Event Handler */}
+//       <form onSubmit={handleFormSubmission}>
+//         <h2>Typical Form</h2>
+//         <input
+//           type='text'
+//           name='example'
+//           onChange={handleFormInput}
+//           style={{ margin: '1rem 0' }}
+//         />
+//         {/* add button with type='submit' */}
+//         <button type='submit'>submit form</button>
+//       </form>
+//     </section>
+//   );
+// };
 
 
 const Book = (props) => {
-  const { image, title, author, getBook, id } = props;
-  const getSingleBook = () => {
-    getBook(id)
-  }
+  const { image, title, author, number } = props;
+
   return (
     <article className='book'>
-      <img
-        src={image}
-        alt={title}
-      />
+      <img src={image} alt={title} />
       <h2>{title}</h2>
-      <button onClick={getSingleBook}>Click to see Title</button>
       <h4>{author}</h4>
+      <span className='number'>{`# ${number + 1}`}</span>
     </article>
   );
 };
