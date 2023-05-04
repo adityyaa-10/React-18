@@ -36,3 +36,5 @@ export const booksdetails = [
         id: 5,
     },
 ]
+
+//We can only have one default export per file.
